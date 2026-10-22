@@ -3,7 +3,7 @@
 
 ### Data Science Student | Python | Machine Learning | AI
 
-🇫🇷 Français | 🇬🇧 English
+
 
 ---
 
