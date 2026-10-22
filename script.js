@@ -203,3 +203,69 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const translations = {
+    fr: {
+      heroTitle: "Portfolio Data Science",
+      heroDescription:
+        "Étudiante en sciences des données, passionnée par l'intelligence artificielle.",
+      home: "Accueil",
+      about: "À propos",
+      skills: "Compétences",
+      projects: "Projets",
+      education: "Formation",
+      contact: "Contact",
+      viewProjects: "Voir mes projets",
+      contactMe: "Me contacter"
+    },
+    en: {
+      heroTitle: "Data Science Portfolio",
+      heroDescription:
+        "Data Science student passionate about artificial intelligence.",
+      home: "Home",
+      about: "About",
+      skills: "Skills",
+      projects: "Projects",
+      education: "Education",
+      contact: "Contact",
+      viewProjects: "View my projects",
+      contactMe: "Contact me"
+    }
+  };
+
+  const buttons = document.querySelectorAll(".lang-btn");
+
+  function setLanguage(lang) {
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+      const key = element.dataset.i18n;
+      const translation = translations[lang][key];
+
+      if (translation !== undefined) {
+        element.textContent = translation;
+      }
+    });
+
+    buttons.forEach(button => {
+      const isActive = button.dataset.lang === lang;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+
+    localStorage.setItem("portfolio-language", lang);
+  }
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      setLanguage(button.dataset.lang);
+    });
+  });
+
+  const savedLanguage =
+    localStorage.getItem("portfolio-language") || "fr";
+
+  setLanguage(savedLanguage);
+});
+
